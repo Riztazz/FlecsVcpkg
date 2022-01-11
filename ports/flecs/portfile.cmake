@@ -13,7 +13,6 @@ vcpkg_cmake_configure(
 
 vcpkg_cmake_install()
 
-message("blablblalbla" ${CURRENT_PACKAGES_DIR})
 if(EXISTS ${CURRENT_PACKAGES_DIR}/cmake)
     vcpkg_cmake_config_fixup(CONFIG_PATH cmake)
 else()
