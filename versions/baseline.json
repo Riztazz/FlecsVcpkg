@@ -1,6 +1,8 @@
 {
-  "default": 
-  {
-    "flecs": { "baseline": "1.0.0", "port-version": 0 }
-  }
+    "default": {
+        "flecs": {
+        "baseline": "2.4.8",
+        "port-version": 0
+        }
+    }
 }

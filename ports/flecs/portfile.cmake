@@ -1,27 +1,23 @@
 vcpkg_from_github(
-  OUT_SOURCE_PATH SOURCE_PATH
-  REPO SanderMertens/flecs
-  REF ae64dda9155fd2e29fe06f2eb45e59803ffbb1f0
-  SHA512 980e945c7d2f2d7ff815984cafbaf1e7d6f421464dd1c41ee053d1912e2eb16d1078677b061a3a93336aa7d597f44ba388165f821292172a695ced896fa7635f
-  HEAD_REF master
+    OUT_SOURCE_PATH SOURCE_PATH
+    REPO SanderMertens/flecs
+    REF v2.4.8
+    SHA512 4d4ee41a457f6e13b5913bbc12f66dc9a3bcab3f39ad398da55892bb80649cf416d82255f17bbcef4fee11992028cbb2972d0e9e435435cb58a7b33ec2ebe526
+    HEAD_REF master
 )
+
+string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" FLECS_BUILD_SHARED_LIBS)
+string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "static" FLECS_BUILD_STATIC_LIBS)
 
 vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    DISABLE_PARALLEL_CONFIGURE
+    PREFER_NINJA
+    OPTIONS
+        -DFLECS_SHARED_LIBS=${FLECS_BUILD_SHARED_LIBS}
+        -DFLECS_STATIC_LIBS=${FLECS_BUILD_STATIC_LIBS}
 )
 
 vcpkg_cmake_install()
+vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/flecs")
 
-if(EXISTS ${CURRENT_PACKAGES_DIR}/cmake)
-    vcpkg_cmake_config_fixup(CONFIG_PATH cmake)
-else()
-    vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/flecs)
-endif()
-
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
-
-file(
-  INSTALL "${SOURCE_PATH}/LICENSE"
-  DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
-  RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/flecs RENAME copyright)

@@ -1,17 +1,16 @@
 {
   "name": "flecs",
   "version": "2.4.8",
-  "description": "A fast entity component system (ECS) for C & C++",
   "homepage": "https://github.com/SanderMertens/flecs",
-  "dependencies": 
-  [
-      {
-        "name": "vcpkg-cmake",
-        "host": true
-      },
-      {
-        "name": "vcpkg-cmake-config",
-        "host": true
-      }
+  "description": "Flecs is a fast and lightweight Entity Component System that lets you build games and simulations with millions of entities.",
+  "dependencies": [
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
   ]
 }
